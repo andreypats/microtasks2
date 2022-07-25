@@ -1,6 +1,9 @@
 import React, {useState} from 'react';
+import {NewComponent} from "./NewComponent";
 
 export function Filter() {
+
+    type  FilterType = 'all' | 'dollar' | 'ruble'
 
     const [money, setMoney] = useState([
         {banknots: 'Dollars', value: 100, number: ' a1234567890'},
@@ -13,33 +16,25 @@ export function Filter() {
         {banknots: 'RUBLS', value: 50, number: ' v1234567890'},
     ])
 
-    let currentMoney = money.filter((filteredMoney) => filteredMoney.banknots === 'RUBLS')
+    const [filter, setFilter] = useState<FilterType>('all')
 
-    const onClickFilterHandler = (banknots: string) => {
-        console.log(banknots)
+    let currentMoney = money;
+
+    if (filter === 'dollar') {
+        currentMoney = money.filter((filteredMoney) => filteredMoney.banknots === 'dollar')
+    }
+    if (filter === 'ruble') {
+        currentMoney = money.filter((filteredMoney) => filteredMoney.banknots === 'ruble')
+    }
+
+    const onClickFilterHandler = (click: FilterType) => {
+        setFilter(click)
     }
 
     return (
-        <div className="Filter">
-            <ul>
-                {currentMoney.map((obj: { banknots: string, value: number, number: string }, index) => {
-                    return (
-                        <li key={index}>
-                            <span>{obj.banknots}</span>
-                            <span>{obj.value}</span>
-                            <span>{obj.number}</span>
-                        </li>
-                    )
-                })}
-            </ul>
-            <div style={{marginLeft:'35px'}}>
-                <button onClick={(event) => onClickFilterHandler('all')}>all</button>
-                <button onClick={(event) => onClickFilterHandler('rubls')}>rubls</button>
-                <button onClick={(event) => onClickFilterHandler('dollars')}>dollars</button>
-            </div>
-        </div>
+        <>
+            <NewComponent currentMoney={currentMoney} onClickFilterHandler={onClickFilterHandler}/>
+        </>
     );
 }
-
-//15:32
 
