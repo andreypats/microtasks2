@@ -5,7 +5,7 @@ export function Filter() {
 
     type  FilterType = 'all' | 'dollar' | 'ruble'
 
-    const [money, setMoney] = useState([
+    let [money, setMoney] = useState([
         {banknots: 'Dollars', value: 100, number: ' a1234567890'},
         {banknots: 'Dollars', value: 50, number: ' z1234567890'},
         {banknots: 'RUBLS', value: 100, number: ' w1234567890'},
@@ -16,25 +16,28 @@ export function Filter() {
         {banknots: 'RUBLS', value: 50, number: ' v1234567890'},
     ])
 
-    const [filter, setFilter] = useState<FilterType>('all')
+    let [filter, setFilter] = useState<FilterType>('all')
 
     let currentMoney = money;
 
     if (filter === 'dollar') {
-        currentMoney = money.filter((filteredMoney) => filteredMoney.banknots === 'dollar')
+        currentMoney = money.filter(filteredMoney => filteredMoney.banknots === 'Dollars')
     }
     if (filter === 'ruble') {
-        currentMoney = money.filter((filteredMoney) => filteredMoney.banknots === 'ruble')
+        currentMoney = money.filter(filteredMoney => filteredMoney.banknots === 'RUBLS')
     }
 
-    const onClickFilterHandler = (click: FilterType) => {
+    let onClickFilterHandler = (click: FilterType) => {
         setFilter(click)
     }
 
     return (
-        <>
-            <NewComponent currentMoney={currentMoney} onClickFilterHandler={onClickFilterHandler}/>
-        </>
+            <div className="Filter">
+                <NewComponent
+                    currentMoney={currentMoney}
+                    onClickFilterHandler={onClickFilterHandler}
+                />
+            </div>
     );
 }
 

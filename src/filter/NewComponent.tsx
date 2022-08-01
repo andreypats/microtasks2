@@ -1,18 +1,19 @@
 import React from "react";
 
+type  FilterType = 'all' | 'dollar' | 'ruble'
+
 type NewComponentPropsType = {
-    currentMoney: Array<currentMoneyPropsType>
-    onClickFilterHandler: any
+    currentMoney: Array<MoneyPropsType>
+    onClickFilterHandler: (click: FilterType)=>void
 }
 
-type currentMoneyPropsType = {
+type MoneyPropsType = {
     banknots: string,
     value: number,
     number: string
 }
 
 export const NewComponent = (props: NewComponentPropsType) => {
-
     return (
         <div className="NewComponent">
             <ul>
@@ -26,7 +27,7 @@ export const NewComponent = (props: NewComponentPropsType) => {
                     )
                 })}
             </ul>
-            <div style={{marginLeft:'35px'}}>
+            <div style={{marginLeft: '35px'}}>
                 <button onClick={() => props.onClickFilterHandler('all')}>all</button>
                 <button onClick={() => props.onClickFilterHandler('ruble')}>rubls</button>
                 <button onClick={() => props.onClickFilterHandler('dollar')}>dollars</button>

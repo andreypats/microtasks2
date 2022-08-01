@@ -3,15 +3,23 @@ import {Click} from "./components/Click";
 
 export function Button() {
 
-    const Button1Foo = (subscriber: string, age: number, address?: string) => {
+    const Button1Foo = (subscriber: string, age: number, address: string) => {
         console.log(subscriber, age, address)
+    }
+
+    const Button2Foo = (subscriber: string) => {
+        console.log(subscriber)
+    }
+
+    const Button3Foo = () => {
+        console.log('I am Stupid BUTTON')
     }
 
     return (
         <div className="Button">
             <Click name={'YouTube-1'} callBack={()=>Button1Foo ('Hello, i am Andrey,', 24, 'Minsk')}/>
-            <Click name={'YouTube-2'} callBack={()=>Button1Foo('Hello, i am Maksim,', 33)}/>
-            {/*<Click name={'YouTube-3'} callBack={Button1Foo}/>*/}
+            <Click name={'YouTube-2'} callBack={()=>Button2Foo('Hello, i am Maksim,')}/>
+            <Click name={'Stupid BUTTON'} callBack={Button3Foo}/>
         </div>
     )
 
